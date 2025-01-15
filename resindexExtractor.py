@@ -18,18 +18,13 @@ with open(sys.argv[1], 'rb+') as f:
 
     for folder_name in os.listdir(bDir):
         folder_path = os.path.join(bDir, folder_name)
-        
-        if os.path.isdir(folder_path):  # Ensure it's a directory
+        if os.path.isdir(folder_path):
             combined_file_name = f"chunk_{folder_name.zfill(8)}.bin"
             combined_file_path = os.path.join(folder_path, combined_file_name)
-
-            # Open the combined file for writing
             with open(combined_file_path, 'wb') as combined_file:
-                # Iterate through each file in the folder
                 for file_name in os.listdir(folder_path):
                     file_path = os.path.join(folder_path, file_name)
                     if os.path.isfile(file_path) and file_name != combined_file_name:
-                        # Append the content of each file to the combined file
                         with open(file_path, 'rb') as input_file:
                             combined_file.write(input_file.read())
 
